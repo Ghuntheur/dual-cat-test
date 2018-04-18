@@ -99,7 +99,12 @@ export class BoardComponent implements OnInit {
     const row = this._getRow(cell.row);
     const playerCells = row.filter(c => c.playerId === this.currentPlayer.id);
     if (playerCells.length >= 4) {
-      return playerCells[playerCells.length - 1].column - playerCells[0].column === 3;
+      for (let i = 0; i < playerCells.length - 1; i++) {
+        if (playerCells[i + 1].column - playerCells[i].column !== 1) {
+          return false;
+        }
+      }
+      return true;
     }
     return false;
   }
@@ -118,7 +123,11 @@ export class BoardComponent implements OnInit {
     const playerCells = diag.filter(c => c.playerId === this.currentPlayer.id);
     console.log(playerCells);
     if (playerCells.length >= 4) {
-      return playerCells[playerCells.length - 1].row - playerCells[0].row === 3;
+      for (let i = 0; i < playerCells.length - 1; i++) {
+        if (playerCells[i + 1].id - playerCells[i].id !== this.rows - 1) {
+          return false;
+        }
+      }
     }
     return false;
   }
@@ -128,7 +137,11 @@ export class BoardComponent implements OnInit {
     const playerCells = diag.filter(c => c.playerId === this.currentPlayer.id);
     console.log(playerCells);
     if (playerCells.length >= 4) {
-      return playerCells[playerCells.length - 1].row - playerCells[0].row === 3;
+      for (let i = 0; i < playerCells.length - 1; i++) {
+        if (playerCells[i + 1].id - playerCells[i].id !== this.rows + 1) {
+          return false;
+        }
+      }
     }
     return false;
   }
