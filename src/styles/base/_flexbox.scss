@@ -1,0 +1,69 @@
+.flex {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.justify-content-start{
+  justify-content:flex-start !important;
+}
+.justify-content-end{
+  justify-content:flex-start !important;
+}
+.justify-content-center{
+  justify-content:center !important;
+}
+.justify-content-sb{
+  justify-content:space-between !important;
+}
+.justify-content-sa{
+  justify-content:space-around !important;
+}
+.justify-content-evenly{
+  justify-content:space-evenly !important;
+}
+
+.alig-items-start {
+  align-items: flex-start !important;
+}
+.align-items-end{
+  align-items:flex-start !important;
+}
+.align-items-center{
+  align-items:center !important;
+}
+.align-items-sb{
+  align-items:space-between !important;
+}
+.align-items-sa{
+  align-items:space-around !important;
+}
+.align-items-evenly{
+  align-items:space-evenly !important;
+}
+
+.content-align-end{
+  justify-content:flex-start !important;
+}
+.content-align-center{
+  justify-content:center !important;
+}
+.content-align-sb{
+  justify-content:space-between !important;
+}
+.content-align-sa{
+  justify-content:space-around !important;
+}
+
+.align-self-center {
+  align-self:center !important
+}
+.align-self-end{
+  align-self:flex-start !important;
+}
+.align-self-center{
+  align-self:center !important;
+}

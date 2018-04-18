@@ -1,0 +1,74 @@
+html {
+  width: 100vw;
+  height: 100%;
+  font-size: 15px;
+  font-family: $font-main;
+  background: $main-background;
+  overflow-x: hidden;
+  color: $font-colour;
+}
+
+body: {
+  min-height: 100%;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.content-align-start{
+    justify-content:flex-start !important;
+}
+.content-align-end{
+    justify-content:flex-start !important;
+}
+.content-align-center{
+    justify-content:center !important;
+}
+.content-align-sb{
+    justify-content:space-between !important;
+}
+.content-align-sa{
+    justify-content:space-around !important;
+}
+.content-align-evenly{
+    justify-content:space-evenly !important;
+}
+
+$spacing-sizes: 0px, 8px, 16px, 32px, 48px, 64px;
+@each $size in $spacing-sizes{
+  $i : index($spacing-sizes, $size) - 1;
+
+  .mt-#{$i}{ margin-top:$size !important; }
+  .mb-#{$i}{ margin-bottom:$size !important; }
+  .ml-#{$i}{ margin-left:$size !important; }
+  .mr-#{$i}{ margin-right:$size !important; }
+
+  .pt-#{$i}{ padding-top:$size !important; }
+  .pb-#{$i}{ padding-bottom:$size !important; }
+  .pl-#{$i}{ padding-left:$size !important; }
+  .pr-#{$i}{ padding-right:$size !important; }
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.main-wrapper {
+  position: absolute;
+  right: 0;
+  top: 10%;
+  width: 80%;
+  padding: 2.5%;
+}
