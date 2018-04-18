@@ -1,4 +1,9 @@
 <div class="board">
-  <dc-cell *ngFor="let cell of cells" (click)="play(cell)" [class.red]="cell.playerId === 1" [class.blue]="cell.playerId === 2"></dc-cell>
-  <h4 class="mt-4">{{ currentPlayer.name }} est en train de jouer !</h4>
+  <div class="cell" *ngFor="let cell of cells" (click)="play(cell)" [class.red]="cell.playerId === 1" [class.yellow]="cell.playerId === 2"></div>
+</div>
+<h4 class="mt-2 flex justify-content-center">{{ currentPlayer.color }} est en train de jouer !</h4>
+<div class="output mt-2">
+  <button (click)="reset()">Recommencer une partie</button>
+  <button (click)="save()">Sauvegarder</button>
+  <button (click)="loadGame()">Charger partie</button>
 </div>

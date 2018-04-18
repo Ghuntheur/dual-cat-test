@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Cell } from '@models/cell.model';
 import { Player } from '@models/player.model';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'dc-board',
@@ -21,7 +22,15 @@ export class BoardComponent implements OnInit {
 
   currentPlayer: Player;
 
-  constructor() {
+  constructor(private storageSvc: StorageService) {
+    this.initGame();
+  }
+
+  ngOnInit() {
+
+  }
+
+  initGame(): void {
     for (let i = 0; i < this.columns; i++) {
       for (let j = 0; j < this.rows; j++) {
         this.cells.push({
@@ -32,14 +41,32 @@ export class BoardComponent implements OnInit {
       }
     }
 
-    this.p1 = { id: 1, name: 'ME', color: 'red' };
-    this.p2 = { id: 2, name: 'YOU', color: 'blue' };
+    this.p1 = { id: 1, color: 'RED'};
+    this.p2 = { id: 2, color: 'YELLOW'};
 
+    this.currentRound = 0;
     this.currentPlayer = this.p1;
   }
 
-  ngOnInit() {
+  reset(): void {
+    this.cells = [];
+    this.initGame();
+  }
 
+  save(): void {
+    this.storageSvc.setItem('currentPlayer', this.currentPlayer);
+    this.storageSvc.setItem('cells', this.cells);
+    this.storageSvc.setItem('currentRound', this.currentRound);
+  }
+
+  loadGame(): void {
+    const cells = this.storageSvc.getItem('cells');
+    const currentPlayer = this.storageSvc.getItem('currentPlayer');
+    if (cells && currentPlayer) {
+      this.cells = cells;
+      this.currentPlayer = currentPlayer;
+      this.currentRound = this.storageSvc.getItem('currentRound');
+    }
   }
 
   play(cell: Cell): void {
@@ -54,9 +81,13 @@ export class BoardComponent implements OnInit {
       const winner: Player = this._checkWin(lowestCell);
       if (winner === null && this.currentRound >= this.rows * this.columns) {
         alert('fin de partie');
+        this.reset();
+        return;
       }
       if (winner) {
-        alert(`Le gagnant est ${winner.name}`);
+        alert(`Le gagnant est ${winner.color}`);
+        this.reset();
+        return;
       }
     }
 
@@ -68,7 +99,6 @@ export class BoardComponent implements OnInit {
   }
 
   private _checkWin(cell: Cell): Player {
-    // pas de prise en compte des lignes de 5 ou plus
     if (this._checkWinRow(cell) || this._checkWinCol(cell) || this._checkWinAscDiagonal(cell) || this._checkWinDescDiagonal(cell)) {
       return this.currentPlayer;
     }
@@ -123,11 +153,13 @@ export class BoardComponent implements OnInit {
     const playerCells = diag.filter(c => c.playerId === this.currentPlayer.id);
     console.log(playerCells);
     if (playerCells.length >= 4) {
+      console.log(this.rows - 1);
       for (let i = 0; i < playerCells.length - 1; i++) {
         if (playerCells[i + 1].id - playerCells[i].id !== this.rows - 1) {
           return false;
         }
       }
+      return true;
     }
     return false;
   }
@@ -135,13 +167,13 @@ export class BoardComponent implements OnInit {
   private _checkWinDescDiagonal(cell: Cell): boolean {
     const diag = this._getDescDiagonal(cell.id);
     const playerCells = diag.filter(c => c.playerId === this.currentPlayer.id);
-    console.log(playerCells);
     if (playerCells.length >= 4) {
       for (let i = 0; i < playerCells.length - 1; i++) {
         if (playerCells[i + 1].id - playerCells[i].id !== this.rows + 1) {
           return false;
         }
       }
+      return true;
     }
     return false;
   }

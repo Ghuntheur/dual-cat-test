@@ -4,12 +4,25 @@
   align-items: center;
   flex-wrap: wrap;
   width: 700px;
-}
-
-.red {
-  background: red;
-}
-
-.blue {
   background: blue;
+  .cell {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: white;
+    border: solid 6px blue;
+    cursor: pointer;
+    &.yellow {
+      background: yellow;
+    }
+    &.red {
+      background: red;
+    }
+  }
+}
+
+.output {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
 }
