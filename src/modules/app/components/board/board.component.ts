@@ -57,6 +57,7 @@ export class BoardComponent implements OnInit {
     this.storageSvc.setItem('currentPlayer', this.currentPlayer);
     this.storageSvc.setItem('cells', this.cells);
     this.storageSvc.setItem('currentRound', this.currentRound);
+    alert('PARTIE SAUVEGARDEE');
   }
 
   loadGame(): void {
