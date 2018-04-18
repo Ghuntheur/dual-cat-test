@@ -1,0 +1,15 @@
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 700px;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
